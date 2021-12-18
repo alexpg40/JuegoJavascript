@@ -5,5 +5,6 @@ window.onload = () => {
     let board = new gameBoard(10);
     board.draw();
     let personaje = new Character('Alex');
-    personaje.draw(0,0);
+    personaje.draw(6,3);
+    personaje.where(1, 10);
 }
