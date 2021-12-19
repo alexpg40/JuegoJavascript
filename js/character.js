@@ -70,7 +70,7 @@ export default class Character{
             pointer.id = `${this.getX + dado},${this.getY}`;
             pointer.addEventListener('click', () => {
                 let boxPoint = pointer.id.split(",");
-                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]));
+                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
             boxRight.appendChild(pointer); 
         }
@@ -81,7 +81,7 @@ export default class Character{
             pointer.id = `${this.getX - dado},${this.getY}`;
             pointer.addEventListener('click', () => {
                 let boxPoint = pointer.id.split(",");
-                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]));
+                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
             boxLeft.appendChild(pointer);
         }
@@ -92,7 +92,7 @@ export default class Character{
             pointer.id = `${this.getX},${this.getY - dado}`;
             pointer.addEventListener('click', () => {
                 let boxPoint = pointer.id.split(",");
-                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]));
+                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
             boxBot.appendChild(pointer);
         }
@@ -103,7 +103,7 @@ export default class Character{
             pointer.id = `${this.getX},${this.getY + dado}`;
             pointer.addEventListener('click', () => {
                 let boxPoint = pointer.id.split(",");
-                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]));
+                this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
             boxTop.appendChild(pointer);
         }
@@ -128,7 +128,7 @@ export default class Character{
         document.body.appendChild(tag);
     }
 
-    move(x, y){
+    move(x, y, size){
         let box = document.getElementById(`box[${x},${y}]`);
         let personaje = document.getElementById('character');
         box.appendChild(personaje);
@@ -136,7 +136,9 @@ export default class Character{
         this.setY = y;
         this.removePointers();
         this.createTag();
-        this.setAttempts = this.getAttempts++;
+        if(this.getX == size - 1 && this.getY == 0){
+            alert('Has ganado!');
+        }
     }
 
     removePointers(){
