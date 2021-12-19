@@ -59,6 +59,7 @@ export default class Character{
         box.appendChild(img);
         this.setX = long;
         this.setY = lat;
+        this.createTag();
     }
 
     where(dado, size){
@@ -120,7 +121,7 @@ export default class Character{
         let divCharacter = document.getElementsByTagName('img')[0];
         let x = divCharacter.offsetLeft;
         let y = divCharacter.offsetTop;
-        y-=40;
+        y-=34;
         tag.style.position = 'fixed';
         tag.style.left = x + 'px';
         tag.style.top = y + 'px';
