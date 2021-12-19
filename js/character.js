@@ -6,6 +6,7 @@ export default class Character{
         this.x = 0;
         this.y = 0;
         this.sprite = "../img/queen.png";
+        this.attempts = 0;
     }
 
     get getNombre(){
@@ -24,13 +25,31 @@ export default class Character{
         return this.y;
     }
 
+    /**
+     * @param {number} j
+     */
     set setX(j){
         this.x = j;
     }
 
+    /**
+     * @param {number} k
+     */
     set setY(k){
         this.y = k;
     }
+
+    get getAttempts(){
+        return this.attempts;
+    }
+    
+    /**
+     * @param {number} att
+     */
+    set setAttempts(att){
+        this.attempts = att;
+    }
+
 
     draw(long, lat){
         let box = document.getElementById(`box[${long},${lat}]`);
@@ -40,7 +59,6 @@ export default class Character{
         box.appendChild(img);
         this.setX = long;
         this.setY = lat;
-        this.createTag();
     }
 
     where(dado, size){
@@ -91,6 +109,10 @@ export default class Character{
     }
 
     createTag(){
+        let oldTag = document.getElementsByClassName('tag')[0];
+        if(oldTag != undefined){
+            oldTag.parentNode.removeChild(oldTag);
+        }
         let tagName = this.getNombre;
         let tag = document.createElement('div');
         tag.innerText = tagName;
@@ -99,7 +121,7 @@ export default class Character{
         let x = divCharacter.offsetLeft;
         let y = divCharacter.offsetTop;
         y-=40;
-        tag.style.position = 'relative';
+        tag.style.position = 'fixed';
         tag.style.left = x + 'px';
         tag.style.top = y + 'px';
         document.body.appendChild(tag);
@@ -112,6 +134,8 @@ export default class Character{
         this.setX = x;
         this.setY = y;
         this.removePointers();
+        this.createTag();
+        this.setAttempts = this.getAttempts++;
     }
 
     removePointers(){
@@ -120,4 +144,5 @@ export default class Character{
             pointers[0].parentNode.removeChild(pointers[0]);
         }
     }
+
 }
