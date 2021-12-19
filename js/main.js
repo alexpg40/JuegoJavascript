@@ -6,5 +6,11 @@ window.onload = () => {
     board.draw();
     let personaje = new Character('Alex');
     personaje.draw(6,3);
-    personaje.where(1, 10);
+    let dado = document.getElementById('dado');
+    dado.addEventListener('click', () => {
+        if(document.getElementsByClassName('pointer').length === 0){
+            let numeroAletorio = Math.floor(Math.random()*5 + 1);
+            personaje.where(numeroAletorio, 10);
+        }
+    });
 }
