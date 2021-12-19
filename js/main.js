@@ -11,7 +11,6 @@ window.onload = () => {
         if(document.getElementsByClassName('pointer').length === 0){
             let numeroAletorio = Math.floor(Math.random()*5 + 1);
             personaje.where(numeroAletorio, 10);
-            console.log(personaje.getAttempts)
         }
     });
 }
