@@ -25,16 +25,10 @@ export default class Character{
         return this.y;
     }
 
-    /**
-     * @param {number} j
-     */
     set setX(j){
         this.x = j;
     }
 
-    /**
-     * @param {number} k
-     */
     set setY(k){
         this.y = k;
     }
@@ -43,9 +37,6 @@ export default class Character{
         return this.attempts;
     }
     
-    /**
-     * @param {number} att
-     */
     set setAttempts(att){
         this.attempts = att;
     }
@@ -63,6 +54,7 @@ export default class Character{
     }
 
     where(dado, size){
+        console.log(this.attempts);
         if(this.getX + dado < size){
             let boxRight = document.getElementById(`box[${this.getX + dado},${this.getY}]`);
             let pointer = document.createElement('div');
@@ -107,6 +99,7 @@ export default class Character{
             })
             boxTop.appendChild(pointer);
         }
+        this.setAttempts = this.getAttempts+1;
     }
 
     createTag(){
