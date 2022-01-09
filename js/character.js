@@ -133,7 +133,6 @@ export default class Character{
             alert('Has ganado!');
         }
     }
-
     removePointers(){
         let pointers = document.getElementsByClassName('pointer');
         while(pointers.length > 0){
