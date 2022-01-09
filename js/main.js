@@ -6,25 +6,24 @@ import gameBoard from "./gameBoard.js";
 window.onload = () => {
     let boton = document.getElementById('jugar');
     boton.addEventListener('click', (eve) => {
+        eve.preventDefault();
         let nombre = document.getElementById('nombre').value;
         validarNombre(nombre);
-        eve.preventDefault();
     })
 }
 
-const post = (nombre) => {
-    console.log(nombre);
-    fetch("../control-nombre.php", {
+const post = () => {
+    const data = new FormData(document.getElementById('formulario'));
+    return fetch("http://liquid-hilltops.000webhostapp.com/control-nombre.php", {
         method: 'POST',
-        body: nombre.value
+        body: data
     })
     .then((response) => {
         if(response.ok){
             return response.text();
+        } else {
+            throw new Error('No se puedo validar el nombre en el servidor');
         }
-    })
-    .then((text) => {
-        jugar(text);
     })
     .catch((error) => console.error(error));
 }
@@ -36,7 +35,7 @@ const validarNombre = (nombre) => {
     } else if(regexNumero.test(nombre)){
         alert('Números no permitidos');
     } else{
-        post(nombre);
+        post().then(jugar(nombre));
     }
 }
 
