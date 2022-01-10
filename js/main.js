@@ -47,13 +47,15 @@ const jugar = (nombre) => {
         board.draw();
         let personaje = new Character(nombre);
         personaje.draw(0,board.getSize - 1);
-        let dado = document.createElement('buton');
+        let dado = document.createElement('img');
         document.body.appendChild(dado);
-        dado.innerText = "Dado";
+        dado.id = 'dado';
+        dado.src = "../img/dado1.png";
         dado.addEventListener('click', () => {
             if(document.getElementsByClassName('pointer').length === 0){
-                let numeroAletorio = Math.floor(Math.random()*5 + 1);
+                let numeroAletorio = Math.round(Math.random()*5 + 1);
                 personaje.where(numeroAletorio, 10);
+                dado.src = `../img/dado${numeroAletorio}.png`;
             }
         });
 }

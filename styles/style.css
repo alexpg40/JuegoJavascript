@@ -24,3 +24,18 @@ img{
     padding: 5px;
     border-radius: 10px;
 }
+
+body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+html, body{
+    height: 97vh;
+}
+
+img#dado{
+    width: 200px;
+}
