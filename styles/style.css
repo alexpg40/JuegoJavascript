@@ -39,3 +39,6 @@ html, body{
 img#dado{
     width: 200px;
 }
+.enemy{
+    width: 100px;
+}

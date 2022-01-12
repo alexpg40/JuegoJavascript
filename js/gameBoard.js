@@ -1,3 +1,4 @@
+"uses strict";
 export default class gameBoard {
     constructor(sz) {
         this.size = sz;

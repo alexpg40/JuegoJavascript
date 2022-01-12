@@ -1,6 +1,7 @@
 "uses strict";
 
 import Character from "./character.js";
+import Enemy from "./enemy.js";
 import gameBoard from "./gameBoard.js";
 
 window.onload = () => {
@@ -12,7 +13,7 @@ window.onload = () => {
     })
 }
 
-const post = () => {
+const post = async() => {
     const data = new FormData(document.getElementById('formulario'));
     return fetch("http://liquid-hilltops.000webhostapp.com/control-nombre.php", {
         method: 'POST',
@@ -35,7 +36,7 @@ const validarNombre = (nombre) => {
     } else if(regexNumero.test(nombre)){
         alert('Números no permitidos');
     } else{
-        post().then(jugar(nombre));
+        post().then((respuesta) => {respuesta == 'Ok' ? jugar(nombre) : alert('El nombre debe ser impar!')});
     }
 }
 
@@ -51,6 +52,8 @@ const jugar = (nombre) => {
         document.body.appendChild(dado);
         dado.id = 'dado';
         dado.src = "../img/dado1.png";
+        let enemy = new Enemy();
+        enemy.draw(); 
         dado.addEventListener('click', () => {
             if(document.getElementsByClassName('pointer').length === 0){
                 let numeroAletorio = Math.round(Math.random()*5 + 1);

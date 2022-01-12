@@ -111,7 +111,7 @@ export default class Character{
         let tag = document.createElement('div');
         tag.innerText = tagName;
         tag.className = 'tag';
-        let divCharacter = document.getElementsByTagName('img')[0];
+        let divCharacter = document.getElementById('character');
         let x = divCharacter.offsetLeft;
         let y = divCharacter.offsetTop;
         y-=34;
