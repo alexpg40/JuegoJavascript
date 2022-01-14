@@ -137,9 +137,9 @@ export default class Character{
     move(x, y, size){
         let box = document.getElementById(`box[${x},${y}]`);
         let personaje = document.getElementById('character');
-        box.appendChild(personaje);
         this.setX = x;
         this.setY = y;
+        box.appendChild(personaje);
         this.removePointers();
         this.createTag();
         if(this.getX == size - 1 && this.getY == 0){
