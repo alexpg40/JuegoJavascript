@@ -5,7 +5,7 @@ export default class Character{
         this.nombre = nom;
         this.x = 0;
         this.y = 0;
-        this.sprite = "../img/queen.png";
+        this.sprite = "../img/idle.gif";
         this.attempts = 0;
     }
 
@@ -53,7 +53,7 @@ export default class Character{
         this.createTag();
     }
 
-    where(dado, size){
+    where(dado, size, enemy){
         console.log(this.attempts);
         if(this.getX + dado < size){
             let boxRight = document.getElementById(`box[${this.getX + dado},${this.getY}]`);
@@ -61,6 +61,7 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX + dado},${this.getY}`;
             pointer.addEventListener('click', () => {
+                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
@@ -72,6 +73,7 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX - dado},${this.getY}`;
             pointer.addEventListener('click', () => {
+                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
@@ -83,6 +85,7 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX},${this.getY - dado}`;
             pointer.addEventListener('click', () => {
+                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })
@@ -94,6 +97,7 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX},${this.getY + dado}`;
             pointer.addEventListener('click', () => {
+                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
             })

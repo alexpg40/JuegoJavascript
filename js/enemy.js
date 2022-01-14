@@ -1,3 +1,5 @@
+"use strict;"
+
 export default class Enemy{
 
     constructor(sprite = "../img/velocidrome.gif"){
@@ -18,10 +20,24 @@ export default class Enemy{
     }
 
     moveRandom(){
-        this.x = this.x + Math.round(Math.random()*-2 + 1);
-        this.y = this.y + Math.round(Math.random()*-2 + 1);
-        let enemy = document.getElementsByTagName('enemy')[0];
+        let randomX = this.x + Math.round(Math.random()*-2 + 1);
+        let randomY = this.y + Math.round(Math.random()*-2 + 1);
+        let enemy = document.getElementsByClassName('enemy')[0];
+        if(randomX < 10 && randomX > 0){
+            this.x = randomX;
+            if(randomY < 10 && randomY > 0){
+                this.y = randomY;
+            }
+        } else if(randomY < 10 && randomY > 0){
+            this.y = randomY;
+        }
         let divBox = document.getElementById(`box[${this.x},${this.y}]`);
-        divBox.appendChild(enemy);
+        if(!divBox.hasChildNodes()){
+            divBox.appendChild(enemy);
+        }
+    }
+
+    ataque(character){
+        
     }
 }

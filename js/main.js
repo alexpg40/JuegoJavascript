@@ -57,7 +57,7 @@ const jugar = (nombre) => {
         dado.addEventListener('click', () => {
             if(document.getElementsByClassName('pointer').length === 0){
                 let numeroAletorio = Math.round(Math.random()*5 + 1);
-                personaje.where(numeroAletorio, 10);
+                personaje.where(numeroAletorio, 10, enemy);
                 dado.src = `../img/dado${numeroAletorio}.png`;
             }
         });
