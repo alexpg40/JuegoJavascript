@@ -37,7 +37,16 @@ export default class Enemy{
         }
     }
 
+    cerca(character){
+        let a = Math.sqrt(Math.pow(Math.abs(parseInt(character.getX) - parseInt(this.x)), 2) + Math.pow(Math.abs(parseInt(character.getY) - parseInt(this.y)), 2));
+        if(a == 1){
+            return true;
+        }
+        return false;
+    }
+
     ataque(character){
-        
+        character.setHealth = character.getHealth - 1;
+        let characterImg = document.getElementById('character'); 
     }
 }

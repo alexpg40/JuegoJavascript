@@ -5,6 +5,7 @@ export default class Character{
         this.nombre = nom;
         this.x = 0;
         this.y = 0;
+        this.health = 2;
         this.sprite = "../img/idle.gif";
         this.attempts = 0;
     }
@@ -21,6 +22,10 @@ export default class Character{
         return this.x;
     }
 
+    get getHealth(){
+        return this.health;
+    }
+
     get getY(){
         return this.y;
     }
@@ -31,6 +36,10 @@ export default class Character{
 
     set setY(k){
         this.y = k;
+    }
+
+    set setHealth(salud){
+        this.health = salud;
     }
 
     get getAttempts(){
@@ -61,9 +70,9 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX + dado},${this.getY}`;
             pointer.addEventListener('click', () => {
-                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
+                enemy.moveRandom();
             })
             boxRight.appendChild(pointer); 
         }
@@ -73,9 +82,9 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX - dado},${this.getY}`;
             pointer.addEventListener('click', () => {
-                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
+                enemy.moveRandom();
             })
             boxLeft.appendChild(pointer);
         }
@@ -85,9 +94,9 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX},${this.getY - dado}`;
             pointer.addEventListener('click', () => {
-                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
+                enemy.moveRandom();
             })
             boxBot.appendChild(pointer);
         }
@@ -97,9 +106,9 @@ export default class Character{
             pointer.className = 'pointer';
             pointer.id = `${this.getX},${this.getY + dado}`;
             pointer.addEventListener('click', () => {
-                enemy.moveRandom();
                 let boxPoint = pointer.id.split(",");
                 this.move(parseInt(boxPoint[0]), parseInt(boxPoint[1]), size);
+                enemy.moveRandom();
             })
             boxTop.appendChild(pointer);
         }
@@ -137,11 +146,16 @@ export default class Character{
             alert('Has ganado!');
         }
     }
+
     removePointers(){
         let pointers = document.getElementsByClassName('pointer');
         while(pointers.length > 0){
             pointers[0].parentNode.removeChild(pointers[0]);
         }
+    }
+
+    muerto(){
+        return this.getHealth == 0;
     }
 
 }

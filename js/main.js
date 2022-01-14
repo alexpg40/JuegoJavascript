@@ -61,4 +61,16 @@ const jugar = (nombre) => {
                 dado.src = `../img/dado${numeroAletorio}.png`;
             }
         });
+        let personajeImg = document.getElementById('character');
+        personajeImg.addEventListener('DOMNodeInserted', () => {
+            console.log('Me movi');
+            if(enemy.cerca(personaje)){
+                enemy.ataque(personaje);
+                console.log('Me pegastes');
+                if(personaje.muerto()){
+                    console.log('Te moristes')
+                }
+            }
+            console.log(personaje)
+        })
 }
