@@ -59,7 +59,6 @@ export default class Character{
         box.appendChild(img);
         this.setX = long;
         this.setY = lat;
-        this.createTag();
     }
 
     where(dado, size, enemy){
@@ -115,25 +114,6 @@ export default class Character{
         this.setAttempts = this.getAttempts+1;
     }
 
-    createTag(){
-        let oldTag = document.getElementsByClassName('tag')[0];
-        if(oldTag != undefined){
-            oldTag.parentNode.removeChild(oldTag);
-        }
-        let tagName = this.getNombre;
-        let tag = document.createElement('div');
-        tag.innerText = tagName;
-        tag.className = 'tag';
-        let divCharacter = document.getElementById('character');
-        let x = divCharacter.offsetLeft;
-        let y = divCharacter.offsetTop;
-        y-=34;
-        tag.style.position = 'fixed';
-        tag.style.left = x + 'px';
-        tag.style.top = y + 'px';
-        document.body.appendChild(tag);
-    }
-
     move(x, y, size){
         let box = document.getElementById(`box[${x},${y}]`);
         let personaje = document.getElementById('character');
@@ -141,10 +121,6 @@ export default class Character{
         this.setY = y;
         box.appendChild(personaje);
         this.removePointers();
-        this.createTag();
-        if(this.getX == size - 1 && this.getY == 0){
-            alert('Has ganado!');
-        }
     }
 
     removePointers(){
@@ -156,6 +132,10 @@ export default class Character{
 
     muerto(){
         return this.getHealth == 0;
+    }
+
+    win(){
+        return this.getX == 9 && this.getY == 0;
     }
 
 }
