@@ -34,6 +34,11 @@ body{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    background-image: url(../img/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    object-fit: cover;
 }
 
 html, body{
