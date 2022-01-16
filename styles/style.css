@@ -77,6 +77,28 @@ img#dado{
     background-color: red;
 }
 
+table{
+    background-color: white;
+    padding: 10px;
+    border-radius: 1vh;
+    width: 100%;
+}
+tr, td, th{
+    padding: 10px;
+}
+
+th{
+    text-align: center
+}
+
+td{
+    text-align: center;
+}
+
+tr{
+    border-bottom: 1px solid black;
+}
+
 #gameOver h2{
     margin: auto;
 }
