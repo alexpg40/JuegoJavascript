@@ -73,6 +73,7 @@ const jugar = (nombre) => {
         }
         if (personaje.win()) {
             alert('Has ganado!');
+            localStorage.setItem(nombre, String(personaje.getAttempts));
             gameOver();
         }
     })
@@ -93,11 +94,53 @@ const gameOver = () => {
     jugarOtra.id = 'jugarOtra';
     jugarOtra.innerText = "Juega otra vez!";
     opciones.appendChild(jugarOtra);
-    let tablaPuntuaciones = document.createElement('button');
-    tablaPuntuaciones.addEventListener('click', () => { console.log('Tabla de puntuaciones') });
-    tablaPuntuaciones.innerText = 'Ver tabla de puntuaciones';
-    opciones.appendChild(tablaPuntuaciones);
+    let tablaPuntuacionesButton = document.createElement('button');
+    tablaPuntuacionesButton.addEventListener('click', () => { panelPuntuaciones() });
+    tablaPuntuacionesButton.innerText = 'Ver tabla de puntuaciones';
+    opciones.appendChild(tablaPuntuacionesButton);
     opciones.id = 'opciones';
     gameOver.appendChild(opciones);
     document.body.appendChild(gameOver);
+}
+
+
+const panelPuntuaciones = () => {
+    while (document.body.hasChildNodes()) {
+        document.body.removeChild(document.body.childNodes[0])
+    }
+    let panelPuntuaciones = document.createElement('div');
+    let h2 = document.createElement('h2');
+    h2.innerText = 'Tabla de puntuaciones';
+    let tabla;
+    panelPuntuaciones.appendChild(h2);
+    tabla = tablaPuntuaciones();
+    panelPuntuaciones.appendChild(tabla);
+    document.body.appendChild(panelPuntuaciones);
+}
+
+function tablaPuntuaciones(){
+    let puntuaciones = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        puntuaciones.push({nombre: localStorage.key(i), puntuacion: localStorage.getItem(localStorage.key(i))});
+    }
+    let tablaPuntuaciones = document.createElement('table');
+    let trHead = document.createElement('tr');
+    let thNombre = document.createElement('th');
+    let thPuntuacion = document.createElement('th');
+    thNombre.innerText = 'Nombre';
+    thPuntuacion.innerText = 'Puntuacion';
+    trHead.appendChild(thNombre);
+    trHead.appendChild(thPuntuacion);
+    tablaPuntuaciones.appendChild(trHead);
+    puntuaciones.forEach(puntuacion => {
+        let filaPuntuacion = document.createElement('tr');
+        let tdNombre = document.createElement('td');
+        let tdPuntuacion = document.createElement('td');
+        tdNombre.innerText = puntuacion.nombre;
+        tdPuntuacion.innerText = puntuacion.puntuacion;
+        filaPuntuacion.appendChild(tdNombre);
+        filaPuntuacion.appendChild(tdPuntuacion);
+        tablaPuntuaciones.appendChild(filaPuntuacion);
+    })
+    return tablaPuntuaciones;
 }
