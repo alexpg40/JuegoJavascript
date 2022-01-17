@@ -65,6 +65,7 @@ const jugar = (nombre) => {
     personajeImg.addEventListener('DOMNodeInserted', () => {
         console.log('Me movi');
         if (enemy.cerca(personaje)) {
+            console.log('Me pegaron')
             enemy.ataque(personaje);
             if (personaje.muerto()) {
                 console.log('Te moristes')
@@ -73,7 +74,13 @@ const jugar = (nombre) => {
         }
         if (personaje.win()) {
             alert('Has ganado!');
-            localStorage.setItem(nombre, String(personaje.getAttempts));
+            if(!localStorage.getItem(nombre) == null){
+                if(personaje.getAttempts< localStorage.getItem(nombre)){
+                    localStorage.setItem(nombre, String(personaje.getAttempts));
+                }
+            } else {
+                localStorage.setItem(nombre, String(personaje.getAttempts));
+            }
             gameOver();
         }
     })
@@ -109,12 +116,17 @@ const panelPuntuaciones = () => {
         document.body.removeChild(document.body.childNodes[0])
     }
     let panelPuntuaciones = document.createElement('div');
+    panelPuntuaciones.className = "panelPuntuaciones";
     let h2 = document.createElement('h2');
     h2.innerText = 'Tabla de puntuaciones';
     let tabla;
     panelPuntuaciones.appendChild(h2);
     tabla = tablaPuntuaciones();
     panelPuntuaciones.appendChild(tabla);
+    let volver = document.createElement('a');
+    volver.innerText = 'Volver a jugar';
+    volver.href = "index.html";
+    panelPuntuaciones.appendChild(volver);
     document.body.appendChild(panelPuntuaciones);
 }
 
