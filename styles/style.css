@@ -78,7 +78,7 @@ img#dado{
 }
 
 table{
-    background-color: white;
+    background-color: gray;
     padding: 10px;
     border-radius: 1vh;
     width: 100%;
@@ -101,6 +101,19 @@ tr{
 
 #gameOver h2{
     margin: auto;
+}
+
+.panelPuntuaciones{
+    background-color: white;
+    padding: 20px;
+    border-radius: 2vh;
+}
+
+.panelPuntuaciones a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 #opciones button{
