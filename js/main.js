@@ -11,6 +11,8 @@ window.onload = () => {
         let nombre = document.getElementById('nombre').value;
         validarNombre(nombre);
     })
+    let botonPuntuaciones = document.getElementById('puntuaciones');
+    botonPuntuaciones.addEventListener('click', () => {panelPuntuaciones()})
 }
 
 const post = async () => {
@@ -48,19 +50,9 @@ const jugar = (nombre) => {
     board.draw();
     let personaje = new Character(nombre);
     personaje.draw(0, board.getSize - 1);
-    let dado = document.createElement('img');
-    document.body.appendChild(dado);
-    dado.id = 'dado';
-    dado.src = "../img/dado1.png";
     let enemy = new Enemy();
+    crearPanelDado(personaje, enemy);
     enemy.draw();
-    dado.addEventListener('click', () => {
-        if (document.getElementsByClassName('pointer').length === 0) {
-            let numeroAletorio = Math.round(Math.random() * 5 + 1);
-            personaje.where(numeroAletorio, 10, enemy);
-            dado.src = `../img/dado${numeroAletorio}.png`;
-        }
-    });
     let personajeImg = document.getElementById('character');
     personajeImg.addEventListener('DOMNodeInserted', () => {
         console.log('Me movi');
@@ -155,4 +147,33 @@ function tablaPuntuaciones(){
         tablaPuntuaciones.appendChild(filaPuntuacion);
     })
     return tablaPuntuaciones;
+}
+
+const crearPanelDado = (personaje, enemigo) => {
+    let panelDado = document.createElement('div');
+    panelDado.id = "panelDado";
+    let nombrePersonaje = document.createElement('h1');
+    nombrePersonaje.innerText = personaje.nombre;
+    panelDado.appendChild(nombrePersonaje);
+    let vidasContainer = document.createElement('div');
+    vidasContainer.id = 'vidasContainer';
+    let corazon1 = document.createElement('img');
+    corazon1.src = '../img/corazon_lleno.png';
+    let corazon2 = document.createElement('img');
+    corazon2.src = '../img/corazon_lleno.png';
+    vidasContainer.appendChild(corazon1);
+    vidasContainer.appendChild(corazon2);
+    panelDado.appendChild(vidasContainer);
+    let dado = document.createElement('img');
+    dado.id = 'dado';
+    dado.src = "../img/dado1.png";
+    panelDado.appendChild(dado);
+    dado.addEventListener('click', () => {
+        if (document.getElementsByClassName('pointer').length === 0) {
+            let numeroAletorio = Math.round(Math.random() * 5 + 1);
+            personaje.where(numeroAletorio, 10, enemigo);
+            dado.src = `../img/dado${numeroAletorio}.png`;
+        }
+    });
+    document.body.appendChild(panelDado);
 }

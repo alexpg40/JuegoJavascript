@@ -114,7 +114,7 @@ export default class Character{
         this.setAttempts = this.getAttempts+1;
     }
 
-    move(x, y, size){
+    move(x, y){
         let box = document.getElementById(`box[${x},${y}]`);
         let personaje = document.getElementById('character');
         this.setX = x;
