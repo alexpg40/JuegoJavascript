@@ -32,8 +32,10 @@ export default class Enemy{
             this.y = randomY;
         }
         let divBox = document.getElementById(`box[${this.x},${this.y}]`);
-        if(!divBox.hasChildNodes()){
-            divBox.appendChild(enemy);
+        if(divBox){
+            if(!divBox.hasChildNodes()){
+                divBox.appendChild(enemy);
+            }
         }
     }
 
