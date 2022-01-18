@@ -41,7 +41,6 @@ export default class Enemy{
 
     cerca(character){
         let a = Math.sqrt(Math.pow(Math.abs(parseInt(character.getX) - parseInt(this.x)), 2) + Math.pow(Math.abs(parseInt(character.getY) - parseInt(this.y)), 2));
-        console.log(a);
         if(a <= Math.sqrt(2)){
             return true;
         }

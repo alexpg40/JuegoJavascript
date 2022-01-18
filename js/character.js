@@ -62,7 +62,6 @@ export default class Character{
     }
 
     where(dado, size, enemy){
-        console.log(this.attempts);
         if(this.getX + dado < size){
             let boxRight = document.getElementById(`box[${this.getX + dado},${this.getY}]`);
             let pointer = document.createElement('div');
