@@ -20,7 +20,7 @@
 }
 
 #character{
-    width: 80px;
+    width: 60px;
 }
 .tag{
     background-color: whitesmoke;
@@ -49,8 +49,8 @@ img#dado{
     width: 200px;
 }
 .enemy{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 #gameOver{
