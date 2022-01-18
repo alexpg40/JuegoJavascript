@@ -3,8 +3,8 @@
 }
 
 .box{
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,14 +13,14 @@
 }
 
 .pointer{
-    width: 30px;
+    width: 50px;
     background-color: red;
-    height: 30px;
+    height: 50px;
     margin: 0;
 }
 
 #character{
-    width: 55px;
+    width: 80px;
 }
 .tag{
     background-color: whitesmoke;
@@ -50,6 +50,7 @@ img#dado{
 }
 .enemy{
     width: 100px;
+    height: 100px;
 }
 
 #gameOver{
