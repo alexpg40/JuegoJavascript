@@ -66,12 +66,18 @@ const jugar = (nombre) => {
     enemy.draw();
     let personajeImg = document.getElementById('character');
     personajeImg.addEventListener('DOMNodeInserted', () => {
-        console.log('Me movi');
         if (enemy.cerca(personaje)) {
-            console.log('Me pegaron')
             enemy.ataque(personaje);
+            let corazones = document.querySelectorAll("#vidasContainer img");
+            for (let i = 0; i < corazones.length; i++) {
+                console.log(corazones[i].id);
+                if(corazones[i].id == 'corazon_lleno'){
+                    console.log(corazones[i].src);
+                    corazones[i].src = "../img/corazon_vacio.png";
+                    break;
+                }
+            }
             if (personaje.muerto()) {
-                console.log('Te moristes')
                 gameOver();
             }
         }
@@ -170,8 +176,10 @@ const crearPanelDado = (personaje, enemigo) => {
     vidasContainer.id = 'vidasContainer';
     let corazon1 = document.createElement('img');
     corazon1.src = '../img/corazon_lleno.png';
+    corazon1.id = 'corazon_lleno';
     let corazon2 = document.createElement('img');
     corazon2.src = '../img/corazon_lleno.png';
+    corazon2.id = 'corazon_lleno';
     vidasContainer.appendChild(corazon1);
     vidasContainer.appendChild(corazon2);
     panelDado.appendChild(vidasContainer);
