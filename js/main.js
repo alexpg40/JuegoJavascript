@@ -55,12 +55,16 @@ const jugar = (nombre) => {
     enemy.draw();
     let personajeImg = document.getElementById('character');
     personajeImg.addEventListener('DOMNodeInserted', () => {
-        console.log('Me movi');
         if (enemy.cerca(personaje)) {
-            console.log('Me pegaron')
             enemy.ataque(personaje);
+            let corazones = document.querySelectorAll('#vidasContainer img');
+            for (let i = 0; i < corazones.length; i++){
+                if(corazones[i].id == "corazon_lleno"){
+                    corazones[i].src = "../img/corazon_vacio.png"
+                    break;
+                }
+            }
             if (personaje.muerto()) {
-                console.log('Te moristes')
                 gameOver();
             }
         }
@@ -159,7 +163,9 @@ const crearPanelDado = (personaje, enemigo) => {
     vidasContainer.id = 'vidasContainer';
     let corazon1 = document.createElement('img');
     corazon1.src = '../img/corazon_lleno.png';
+    corazon1.id = 'corazon_lleno';
     let corazon2 = document.createElement('img');
+    corazon2.id = 'corazon_lleno';
     corazon2.src = '../img/corazon_lleno.png';
     vidasContainer.appendChild(corazon1);
     vidasContainer.appendChild(corazon2);
@@ -168,11 +174,16 @@ const crearPanelDado = (personaje, enemigo) => {
     dado.id = 'dado';
     dado.src = "../img/dado1.png";
     panelDado.appendChild(dado);
+    let intentos = document.createElement('h3');
+    intentos.innerText = 'Número de movimientos : 0';
+    intentos.id = 'intentos';
+    panelDado.appendChild(intentos);
     dado.addEventListener('click', () => {
         if (document.getElementsByClassName('pointer').length === 0) {
             let numeroAletorio = Math.round(Math.random() * 5 + 1);
             personaje.where(numeroAletorio, 10, enemigo);
             dado.src = `../img/dado${numeroAletorio}.png`;
+            intentos.innerText = `Número de movimientos: ${personaje.attempts}`
         }
     });
     document.body.appendChild(panelDado);
