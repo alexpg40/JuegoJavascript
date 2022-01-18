@@ -147,12 +147,22 @@ form *{
 
 #jugar{
     padding: 10px;
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.322);
     border: 0px;
     color: white;
 }
 
 #jugar:hover{
+    cursor: pointer;
+}
+
+#comprobarNombre{
+    background-color: white;
+    border: 0px;
+    padding: 10px;
+}
+
+#comprobarNombre:hover{
     cursor: pointer;
 }
 
