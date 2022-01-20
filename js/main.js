@@ -137,7 +137,7 @@ const panelPuntuaciones = () => {
     panelPuntuaciones.appendChild(volver);
     document.body.appendChild(panelPuntuaciones);
 }
-
+/*Genera una tabla con las puntuaciones que han sido guardadas en el localStorage */
 function tablaPuntuaciones(){
     let puntuaciones = [];
     for (let i = 0; i < localStorage.length; i++) {
