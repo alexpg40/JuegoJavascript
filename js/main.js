@@ -52,7 +52,6 @@ const validarNombre = (nombre) => {
         });
     }
 }
-
 const jugar = (nombre) => {
     while (document.body.hasChildNodes()) {
         document.body.removeChild(document.body.childNodes[0])
@@ -144,6 +143,7 @@ function tablaPuntuaciones(){
     for (let i = 0; i < localStorage.length; i++) {
         puntuaciones.push({nombre: localStorage.key(i), puntuacion: localStorage.getItem(localStorage.key(i))});
     }
+    puntuaciones = puntuaciones.sort((a,b)=>a.puntuacion - b.puntuacion);
     let tablaPuntuaciones = document.createElement('table');
     let trHead = document.createElement('tr');
     let thNombre = document.createElement('th');
