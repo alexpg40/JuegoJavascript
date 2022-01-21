@@ -51,6 +51,7 @@ export default class Character{
     }
 
 
+    //Dibujo en una coordenada el personaje
     draw(long, lat){
         let box = document.getElementById(`box[${long},${lat}]`);
         let img = document.createElement('img');
@@ -61,7 +62,10 @@ export default class Character{
         this.setY = lat;
     }
 
+    /*En esta función comprueba dado el número de tablero, como el número obtenido del dado y la posición personaje hacia que casillas se puede 
+    mover si salirte del tablero */
     where(dado, size, enemy){
+        //Comprueba sumando la posicion X actual del personaje y el dado, si es menor que el tamaño del tablero, para moverme positivamente en el eje X (derecha)
         if(this.getX + dado < size){
             let boxRight = document.getElementById(`box[${this.getX + dado},${this.getY}]`);
             let pointer = document.createElement('div');
@@ -74,6 +78,7 @@ export default class Character{
             })
             boxRight.appendChild(pointer); 
         }
+        //Comprueba restando el dado a la posicion X actual del personaje, si es mayor que 0, para moverme negativamente en el eje Y (izquierda)
         if(this.getX - dado >= 0){
             let boxLeft = document.getElementById(`box[${this.getX - dado},${this.getY}]`);
             let pointer = document.createElement('div');
@@ -86,6 +91,7 @@ export default class Character{
             })
             boxLeft.appendChild(pointer);
         }
+        //Compruebo restando el dado a la posicion Y actual del personaje, si es mayor que 0, para moverme negativamente en el eje Y (abajo)
         if(this.getY - dado >= 0){
             let boxBot = document.getElementById(`box[${this.getX},${this.getY - dado}]`);
             let pointer = document.createElement('div');
@@ -98,7 +104,8 @@ export default class Character{
             })
             boxBot.appendChild(pointer);
         }
-        if(this.getY + dado <= size - 1){
+        //Compruebo sumando el dado y la posicíon X actual del personaje, si es menor que el tamaño del tablero, para moverme positivamente en el eje y (arriba)
+        if(this.getY + dado < size){
             let boxTop = document.getElementById(`box[${this.getX},${this.getY + dado}]`);
             let pointer = document.createElement('div');
             pointer.className = 'pointer';
@@ -113,6 +120,7 @@ export default class Character{
         this.setAttempts = this.getAttempts+1;
     }
 
+    //Muevo el personaje a otra casilla
     move(x, y){
         let box = document.getElementById(`box[${x},${y}]`);
         let personaje = document.getElementById('character');
@@ -122,6 +130,7 @@ export default class Character{
         this.removePointers();
     }
 
+    //Elimino todos los pointers
     removePointers(){
         let pointers = document.getElementsByClassName('pointer');
         while(pointers.length > 0){
@@ -129,10 +138,13 @@ export default class Character{
         }
     }
 
+    //Comprueba si el personaje esta muerto
     muerto(){
         return this.getHealth == 0;
     }
 
+
+    //Compruebo si el personaje ha ganado
     win(){
         return this.getX == 9 && this.getY == 0;
     }

@@ -6,6 +6,8 @@ export default class gameBoard {
     get getSize() {
         return this.size;
     }
+
+    //Dibuja el tablero donde se va a jugar
     draw() {
         let size = this.getSize;
         let board = document.createElement('div');

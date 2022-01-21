@@ -11,11 +11,12 @@ window.onload = () => {
         validarNombre(nombre);
     })
     let botonPuntuaciones = document.getElementById('puntuaciones');
-    botonPuntuaciones.addEventListener('click', () => {panelPuntuaciones()})
+    botonPuntuaciones.addEventListener('click', () => { panelPuntuaciones() })
     let botonInstrucciones = document.getElementById('instrucciones');
-    botonInstrucciones.addEventListener('click', () => {instrucciones()})
+    botonInstrucciones.addEventListener('click', () => { instrucciones() })
 }
 
+/*En esta función realizo la petición POST con el formulario del nombre del personaje */
 const post = async () => {
     const data = new FormData(document.getElementById('formulario'));
     return fetch("http://liquid-hilltops.000webhostapp.com/control-nombre.php", {
@@ -31,7 +32,7 @@ const post = async () => {
         })
         .catch((error) => console.error(error));
 }
-
+/*En esta función valido el nombre del personaje */
 const validarNombre = (nombre) => {
     let regexNumero = /\d/;
     if (nombre.length < 4) {
@@ -40,7 +41,7 @@ const validarNombre = (nombre) => {
         alert('Números no permitidos');
     } else {
         post().then((respuesta) => {
-            if(respuesta == 'Ok'){
+            if (respuesta == 'Ok') {
                 let boton = document.getElementById('jugar');
                 boton.disabled = false;
                 let h2Container = document.querySelector('.container h2');
@@ -50,12 +51,14 @@ const validarNombre = (nombre) => {
                     jugar(nombre);
                     eve.preventDefault();
                 })
-            } else{
+            } else {
                 alert('El nombre debe ser impar!');
             }
         });
     }
 }
+
+/*Esta función se encarga de todo lo necesario para poder empezar a jugar */
 const jugar = (nombre) => {
     while (document.body.hasChildNodes()) {
         document.body.removeChild(document.body.childNodes[0])
@@ -69,25 +72,27 @@ const jugar = (nombre) => {
     enemy.draw();
     let personajeImg = document.getElementById('character');
     personajeImg.addEventListener('DOMNodeInserted', () => {
+        //Si el enemigo esta cerca del personaje este le golpea
         if (enemy.cerca(personaje)) {
             enemy.ataque(personaje);
             let corazones = document.querySelectorAll("#vidasContainer img");
             for (let i = 0; i < corazones.length; i++) {
                 console.log(corazones[i].id);
-                if(corazones[i].id == 'corazon_lleno'){
+                if (corazones[i].id == 'corazon_lleno') {
                     console.log(corazones[i].src);
                     corazones[i].src = "../img/corazon_vacio.png";
                     break;
                 }
             }
+            //Compruebo que el personaje haya muerto
             if (personaje.muerto()) {
                 gameOver();
             }
         }
         if (personaje.win()) {
             alert('Has ganado!');
-            if(!localStorage.getItem(nombre) == null){
-                if(personaje.getAttempts< localStorage.getItem(nombre)){
+            if (!localStorage.getItem(nombre) == null) {
+                if (personaje.getAttempts < localStorage.getItem(nombre)) {
                     localStorage.setItem(nombre, String(personaje.getAttempts));
                 }
             } else {
@@ -98,6 +103,7 @@ const jugar = (nombre) => {
     })
 }
 
+/*Esta función se encarga de crear el panel de gameOver cuando tu personaje murio */
 const gameOver = () => {
     while (document.body.hasChildNodes()) {
         document.body.removeChild(document.body.childNodes[0])
@@ -122,7 +128,7 @@ const gameOver = () => {
     document.body.appendChild(gameOver);
 }
 
-
+/*Muesta las puntuaciones guardadas en el localStorage del navegador, ordenadas */
 const panelPuntuaciones = () => {
     while (document.body.hasChildNodes()) {
         document.body.removeChild(document.body.childNodes[0])
@@ -142,12 +148,12 @@ const panelPuntuaciones = () => {
     document.body.appendChild(panelPuntuaciones);
 }
 /*Genera una tabla con las puntuaciones que han sido guardadas en el localStorage */
-function tablaPuntuaciones(){
+function tablaPuntuaciones() {
     let puntuaciones = [];
     for (let i = 0; i < localStorage.length; i++) {
-        puntuaciones.push({nombre: localStorage.key(i), puntuacion: localStorage.getItem(localStorage.key(i))});
+        puntuaciones.push({ nombre: localStorage.key(i), puntuacion: localStorage.getItem(localStorage.key(i)) });
     }
-    puntuaciones = puntuaciones.sort((a,b)=>a.puntuacion - b.puntuacion);
+    puntuaciones = puntuaciones.sort((a, b) => a.puntuacion - b.puntuacion);
     let tablaPuntuaciones = document.createElement('table');
     let trHead = document.createElement('tr');
     let thNombre = document.createElement('th');
@@ -170,6 +176,7 @@ function tablaPuntuaciones(){
     return tablaPuntuaciones;
 }
 
+/*Esta función crea el panel donde se encuentra el dado y demás información relevante como la vida del personaje */
 const crearPanelDado = (personaje, enemigo) => {
     let panelDado = document.createElement('div');
     panelDado.id = "panelDado";
@@ -205,6 +212,7 @@ const crearPanelDado = (personaje, enemigo) => {
     document.body.appendChild(panelDado);
 }
 
+/*Crea las instrucciones que se generan cuando pulsas el boton de instrucciones en el menu */
 const instrucciones = () => {
     while (document.body.hasChildNodes()) {
         document.body.removeChild(document.body.childNodes[0])
