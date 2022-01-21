@@ -12,6 +12,8 @@ window.onload = () => {
     })
     let botonPuntuaciones = document.getElementById('puntuaciones');
     botonPuntuaciones.addEventListener('click', () => {panelPuntuaciones()})
+    let botonInstrucciones = document.getElementById('instrucciones');
+    botonInstrucciones.addEventListener('click', () => {instrucciones()})
 }
 
 const post = async () => {
@@ -187,13 +189,35 @@ const crearPanelDado = (personaje, enemigo) => {
     dado.id = 'dado';
     dado.src = "../img/dado1.png";
     panelDado.appendChild(dado);
-    let intentos = 
+    let intentos = document.createElement('h3');
+    intentos.innerText = 'Llevas 0 intentos';
     dado.addEventListener('click', () => {
         if (document.getElementsByClassName('pointer').length === 0) {
             let numeroAletorio = Math.round(Math.random() * 5 + 1);
             personaje.where(numeroAletorio, 10, enemigo);
             dado.src = `../img/dado${numeroAletorio}.png`;
+            intentos.innerText = `Llevas ${personaje.attempts} intentos`;
         }
     });
+    panelDado.appendChild(intentos);
     document.body.appendChild(panelDado);
+}
+
+const instrucciones = () => {
+    while (document.body.hasChildNodes()) {
+        document.body.removeChild(document.body.childNodes[0])
+    }
+    let divInstrucciones = document.createElement('div');
+    divInstrucciones.className = 'instrucciones';
+    let h2Instrucciones = document.createElement('h2');
+    h2Instrucciones.innerText = 'Como jugar';
+    let descripcion = document.createElement('p');
+    descripcion.innerText = 'Pulsa sobre el dado para obtener un número del 1 al 6, el número obtenido indicará el número de casillas que puedes moverte. Tu objetivo es llegar al cofre del tesoro, pero ten cuidado!, si te mueves a una casilla de distancia al Velocidrome (lagarto azul), perderás una vida, si eres golpeado 2 veces perderás!'
+    divInstrucciones.appendChild(h2Instrucciones);
+    divInstrucciones.appendChild(descripcion);
+    let volver = document.createElement('a');
+    volver.href = 'index.html';
+    volver.innerText = 'Volver al menu';
+    divInstrucciones.appendChild(volver);
+    document.body.appendChild(divInstrucciones);
 }
