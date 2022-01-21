@@ -9,6 +9,8 @@
     align-items: center;
     justify-content: center;
     padding: 4px;
+    background-size: cover;
+    background-position: center;
     background-image: url(../img/grass.webp);
 }
 
@@ -17,6 +19,7 @@
     background-color: red;
     height: 50px;
     margin: 0;
+    opacity: 0.4;
 }
 
 #character{
@@ -228,4 +231,10 @@ form *{
 
 .container{
     text-align: center;
+}
+
+#box\[9\,0\]{
+    background-image: url("../img/grass_chest.webp");
+    background-position: center;
+    background-size: cover;
 }

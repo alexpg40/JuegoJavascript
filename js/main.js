@@ -43,6 +43,8 @@ const validarNombre = (nombre) => {
             if(respuesta == 'Ok'){
                 let boton = document.getElementById('jugar');
                 boton.disabled = false;
+                let h2Container = document.querySelector('.container h2');
+                h2Container.innerText = `A luchar héroe, ${nombre}`;
                 boton.style.backgroundColor = 'red';
                 boton.addEventListener('click', (eve) => {
                     jugar(nombre);
